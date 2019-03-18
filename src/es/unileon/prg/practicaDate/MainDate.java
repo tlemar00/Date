@@ -4,7 +4,7 @@ public class MainDate {
 
 	public static void main(String[] args) {
 
-		Date today, tomorrow;
+		Date today;
 
 		try{
 			today = new Date(18, 03, 2019);
@@ -12,5 +12,6 @@ public class MainDate {
 		}catch(DateException e){
 			System.out.println(e.getMessage());
 		}
+		
 	}
 }

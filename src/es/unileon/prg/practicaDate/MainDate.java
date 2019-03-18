@@ -6,9 +6,11 @@ public class MainDate {
 
 		Date today, tomorrow;
 
-		today = new Date(18, 03, 2019);
-		tomorrow = new Date(19, 03, 2010);
-		
+		try{
+			today = new Date(18, 03, 2019);
+			System.out.println(today.toString());
+		}catch(DateException e){
+			System.out.println(e.getMessage());
+		}
 	}
-
 }

@@ -2,22 +2,37 @@ package es.unileon.prg.practicaDate;
 
 public class Date {
 
-	//Declaracion de variables
+	/*
+	** Declaracion de variables
+	*/
 	private int day;
 	private int month;
 	private int year;
 
-	//Constructor
+	/*
+	** Constructor
+	*/
 	public Date(int day, int month, int year) throws DateException{
-	
-		this.year = year;
 		
+		/*
+		** Comprobamos que el año sea correcto
+		*/
+		if(year < 1){
+			throw new DateException("Año " + month + " no valido. El año no puede ser negativo.");
+		}else{
+			this.year = year;
+		}
+		/*
+		** Comprobamos que el mes sea correcto
+		*/
 		if (month < 1 || month > 12) {
 			throw new DateException("Mes " + month + " no valido. Valores posibles entre 1 y 12.");
 		} else {
 			this.month = month;
 		}
-
+		/*
+		** Comprobamos que el dia sea correcto
+		*/
 		if (day < 1 || day > 31){
 			throw new DateException("Día " + day + " no válido. Valores posibles entre 1 y 31.");
 		}else{
@@ -25,109 +40,150 @@ public class Date {
 		}
 	}
 
-	public int getYear(int year){
-		return this.year;
+	public void setYear(int year){
+		this.year = year;
 	}
 
-	//Comprobamos si es el mismo anio
-	public boolean isSameYear(Date tomorrow){
+	public int getYear(){
+		return year;
+	}
 
-		boolean mismoAnio;
+	/*
+	** Comprobamos si es el mismo anio
+	*/
+	public boolean isSameYear(Date another){
 
-		if(this.year == tomorrow.getYear()){
+		boolean mismoAnio = false;
+
+		if(this.year == another.getYear()){
 			mismoAnio = true;
-			System.out.println("Tienen el mismo año.");
+			System.out.println("¿Tienen el mismo año?");
 		}else{
 			mismoAnio = false;
-			System.out.println("NO tienen el mismo año.");
+			System.out.println("¿Tienen el mismo año?");
 		}
 
 		return mismoAnio;
 	}
 
-	public int getMonth(int month){
-		return this.month;	
+	public void setMonth(int month){
+		this.month = month;
+	}
+
+	public int getMonth(){
+		return month;
 	}
 
 	//Comprobamos si es el mismo mes
-	public boolean isSameMonth(Date tomorrow){
+	public boolean isSameMonth(Date another){
 
-		boolean mismoMes;
+		boolean mismoMes = false;
 
-		if(this.month == tomorrow.getMonth()){
+		if(this.month == another.getMonth()){
 			mismoMes = true;
-			System.out.println("Tienen el mismo mes.");
+			System.out.println("¿Tienen el mismo mes?");
 		}else{
 			mismoMes = false;
-			System.out.println("NO tienen el mismo mes.");
+			System.out.println("¿Tienen el mismo mes?");
 		}
 
 		return mismoMes;
 	}
 
-	public int getDay(int day){
-		return this.day;	
+	public void setDay(int day){
+		this.day = day;
+	}
+
+	public int getDay(){
+		return day;
 	}
 
 	//Comprobamos si es el mismo dia
-	public boolean isSameDay(Date tomorrow){
+	public boolean isSameDay(Date another){
 
-		boolean mismoDia;
+		boolean mismoDia = false;
 
-		if(this.day == tomorrow.getDay()){
+		if(this.day == another.getDay()){
 			mismoDia = true;
-			System.out.println("Tienen el mismo día.");
+			System.out.println("¿Tienen el mismo día?");
 		}else{
 			mismoDia = false;
-			System.out.println("NO tienen el mismo día.");
+			System.out.println("¿Tienen el mismo día?");
 		}
 
 		return mismoDia;
 	}
 
-	//Comprobamos si es la misma fecha
-	public boolean isSame(Date tomorrow){
+	/*
+	** Comprobamos si es la misma fecha
+	*/
+	public boolean isSame(Date another){
 
-		boolean igual;
+		boolean igual = false;
 
-		if((isSameDay() == true) && (isSameMonth() == true) && (isSameYear() == true)){
+		if((this.day == another.getDay()) && (this.month == another.getMonth()) && (this.year == another.getYear())){
 			igual = true;
-			System.out.println("Es la misma fecha.");
+			System.out.println("¿Es la misma fecha?");
 		}else{
 			igual = false;
-			System.out.println("No es la misma fecha.");
+			System.out.println("¿Es la misma fecha?");
 		}
 
 		return igual;
 	}
 
 	/*
-	//Metodo toString
-	public String toString() {
-		return this.day + "/" + this.month + "/" + this.year;
-	}
-	
-	//Comprobamos si es el mismo mes
-	public boolean isSameMonth(int month){
-	
-		return (this.month == month);
-	}
-	
-	//Comprobamos si el mismo dia
-	public boolean isSameDay(int day){
-
-		return (this.day == day);
-	}
-
-	//Comprobamos si es la misma fecha
-	public boolean isSame(){
-
-		return true;
-	}
+	** Devuelve el nombre del mes
 	*/
+	public String getMonthName(){
 
-	//Devuelve el dia del mes
-	public int getDayOfMonth(int day, int month){
+		String nombreMes = "ERROR";
+
+		switch(month){
+			case 1:
+				nombreMes = "Enero";
+				break;
+			case 2:
+				nombreMes = "Febrero";
+				break;
+			case 3: 
+				nombreMes = "Marzo";
+				break;
+			case 4:
+				nombreMes = "Abril";
+				break;
+			case 5:
+				nombreMes = "Mayo";
+				break;
+			case 6:
+				nombreMes = "Junio";
+				break;
+			case 7:
+				nombreMes = "Julio";
+				break;
+			case 8:
+				nombreMes = "Agosto";
+				break;
+			case 9:
+				nombreMes = "Septiembre";
+				break;
+			case 10:
+				nombreMes = "Octubre";
+				break;
+			case 11:
+				nombreMes = "Noviembre";
+				break;
+			default:
+				nombreMes = "Diciembre";
+		}
+
+		return nombreMes;
+	}
+
+	/*
+	** Devuelve el numero de dias del mes
+	*/
+	public int getDayOfMonth(){
 
 		int dias_del_mes = 0;
 
@@ -142,89 +198,45 @@ public class Date {
 			case 12:
 				dias_del_mes = 31;
 				break;
-			case 2:
-				dias_del_mes = 28;
-				break;
 			case 4:
 			case 6:
 			case 9:
 				dias_del_mes = 30;
 				break;
 			default: 
-				break;
+				dias_del_mes = 28;
 		}
+
 		return dias_del_mes;
 	}
 
-	//Devuelve el nombre del mes
-	public String getMonthName(int month){
+	public String seasonName(){
 
-		String v_s_retorno = "ERROR";
+		String season = "Verano";
 
-		switch(month){
-			case 1:
-				v_s_retorno = "Enero";
-				break;
-			case 2:
-				v_s_retorno = "Febrero";
-				break;
-			case 3: 
-				v_s_retorno = "Marzo";
-				break;
-			case 4:
-				v_s_retorno = "Abril";
-				break;
-			case 5:
-				v_s_retorno = "Mayo";
-				break;
-			case 6:
-				v_s_retorno = "Junio";
-				break;
-			case 7:
-				v_s_retorno = "Julio";
-				break;
-			case 8:
-				v_s_retorno = "Agosto";
-				break;
-			case 9:
-				v_s_retorno = "Septiembre";
-				break;
-			case 10:
-				v_s_retorno = "Octubre";
-				break;
-			case 11:
-				v_s_retorno = "Noviembre";
-				break;
-			case 12:
-				v_s_retorno = "Diciembre";
-				break;
-			default:
-			break;
-
-		}
-		return v_s_retorno;
-	}
-
-	public String SeasonName(int day, month){
-
-		String season;
-
-		if(((day >= 21) && (month >= 3)) && (( day < 21 ) && (month <= 6))){
-			season = "Spring";
+		if(((day >= 21) && (month >= 3)) || (( day < 21 ) && (month <= 6))){
+			season = "Primavera";
 		}
 
-		if(((day >= 21) && (month >= 6)) && ((day < 23) && (month <= 9))){
-			season = "Summer";
+		if(((day >= 21) && (month >= 6)) || ((day < 23) && (month <= 9))){
+			season = "Verano";
 		}
 
-		if(((day >= 23) && (month >= 9)) && ((day < 21) && (month <= 12))){
-			season = "Autumn";
+		if(((day >= 23) && (month >= 9)) || ((day < 21) && (month <= 12))){
+			season = "Otoño";
 		}
 		
-		if(((day >= 21) && (month >= 12)) && ((day < 21) && (month <= 3))){
-			season = "Winter";
+		if(((day >= 21) && (month >= 12)) || ((day < 21) && (month <= 3))){
+			season = "Invierno";
 		}
+
 		return season;
 	}
+	
+	//Metodo toString
+	public String toString() {
+		return this.day + "/" + this.month + "/" + this.year;
+	}
+
 
 }

@@ -210,6 +210,9 @@ public class Date {
 		return dias_del_mes;
 	}
 
+	/*
+	** Devuelve el nombre de la estacion
+	*/
 	public String seasonName(){
 
 		String season = "Verano";
@@ -232,11 +235,190 @@ public class Date {
 
 		return season;
 	}
+
+	/*
+	** Devuelve los meses que faltan para acabar el año
+	*/
+	public int getMonthsLeft(){
+
+		int mesesRestantes = 0;
+
+		for(int i = this.month; i <= 12; i++){
+			mesesRestantes = 12 - this.month;
+		}
+
+		return mesesRestantes;
+	}
 	
-	//Metodo toString
+	/*
+	** Metodo toString
+	*/
 	public String toString() {
 		return this.day + "/" + this.month + "/" + this.year;
 	}
 
+	/*
+	** Imprime todas las fechas hasta final de mes
+	*/
+	public int daysEnd(){
+
+		int num = 0;
+
+		/*
+		** Para meses de 31 dias
+		*/
+		if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
+			for(int i = this.day+1; i <= 31; i++){
+				num = num +1;
+			}
+		}
+		/*
+		** Para meses de 30 dias
+		*/
+		if(month == 4 || month == 6 || month == 9 || month == 11 ){
+			for(int i = this.day+1; i <= 30; i++){
+				num = num +1;
+			}		
+		} 
+		/*
+		** Para mes de 28 dias
+		*/
+		if(month == 2 ){
+			for(int i = this.day+1; i <= 29; i++){
+				num = num +1;
+			}
+		}
+		return num;
+	}
+
+	/* 
+	** Imprime los meses con el mismo numero de dias que el mes de la fecha
+	*/		
+	public String monthsSameDays(){
+
+		String meses = " ";
+
+		if(this.month == 1){
+			meses = "Marzo, Mayo, Julio, Agosto, Octubre, Diciembre";
+		}
+		if(this.month == 2){
+			meses = "Febrero";
+		}
+		if(this.month == 3){
+			meses = "Enero, Mayo, Julio, Agosto, Octubre, Diciembre";
+		}
+		if(this.month == 4){
+			meses = "Junio, Septiembre, Noviembre";
+		}
+		if(this.month == 5){
+			meses = "Marzo, Enero, Julio, Agosto, Octubre, Diciembre";
+		}
+		if(this.month == 6){
+			meses = "Abril, Septiembre, Noviembre";
+		}
+		if(this.month == 7){
+			meses = "Marzo, Mayo, Enero, Agosto, Octubre, Diciembre";
+		}
+		if(this.month == 8){
+			meses = "Marzo, Mayo, Julio, Enero, Octubre, Diciembre";
+		}
+		if(this.month == 9){
+			meses = "Junio, Abril, Noviembre";
+		}
+		if(this.month == 10){
+			meses = "Marzo, Mayo, Julio, Agosto, Enero, Diciembre";
+		}
+		if(this.month == 11){
+			meses = "Junio, Septiembre, Abril";
+		}
+		if(this.month == 12){
+			meses = "Marzo, Mayo, Julio, Agosto, Octubre, Enero";
+		}
+
+		return meses;
+	}
+
+	/*
+	** Dias desde principio de anio hasta la fecha
+	*/
+	public int daysSinceFirst(){
+
+		int nums = 0;
+		
+		switch(month){
+			case 1: 
+				nums = day;
+				break;
+			case 2: 
+				nums = day + 31;
+				break;
+			case 3: 
+				nums = day + 31 + 28;
+				break;
+			case 4: 
+				nums = day + 31 + 28 + 31;
+				break;
+			case 5: 
+				nums = day + 31 + 28 + 31 + 30;
+				break;
+			case 6: 
+				nums = day + 31 + 28 + 31 + 30 + 31;
+				break;
+			case 7: 
+				nums = day + 31 + 28 + 31 + 30 + 31 + 30;
+				break;
+			case 8: 
+				nums = day + 31 + 28 + 31 + 30 + 31 + 30 + 31;
+				break;
+			case 9: 
+				nums = day + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31;
+				break;
+			case 10: 
+				nums = day + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30;
+				break;
+			case 11: 
+				nums = day + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31;
+				break;
+			default:
+				nums = day + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 30;
+		}
+
+		return nums;
+	}
+
+	/*
+	** Numero de intentos hasta general una fecha aleatoria igual que la fecha introducida (bucle do-while)
+	*/
+	public int numberAttempsDoWhile(){
+
+		int day_ = 0;
+		int month_ = 0;
+		int attemps = 0;
+		
+		do{
+			day_ = (int)((Math.random()*31)+1);
+			month_ = (int)((Math.random()*12)+1);
+			attemps = attemps +1;
+		}while((day_ != this.day) && (month_ != this.month));
+		
+		return attemps;
+	}
+	/*
+	** Numero de intentos hasta general una fecha aleatoria igual que la fecha introducida (bucle while)
+	*/
+	public int numberAttempsWhile(){
+
+		int day2_ = 0;
+		int month2_ = 0;
+		int attemps2 = 0;
+
+		while((day2_ != this.day) && (month2_ != this.month)){
+			day2_ = (int)((Math.random()*31)+1);
+			month2_ = (int)((Math.random()*12)+1);
+			attemps2 = attemps2 + 1;
+		}
+
+		return attemps2;
+	}
 
 }
